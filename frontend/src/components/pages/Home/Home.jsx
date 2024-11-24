@@ -17,11 +17,10 @@ const Home = () => {
   useEffect(() => {
     try {
       const fetch = async() => {
-        const data = await fetch(`${url}/post/get-post`,{
-          method:"GET",
-          headers : {"content-type" : "application/json"}
-        })
-        const res =await data.json()
+        const data = await axios.get(`${url}/post/get-post`)
+        const res = data.data
+        console.log(res);
+
         dispatch(setPosts( res.allPost));
       } 
       fetch()

@@ -9,7 +9,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://ecm-art.vercel.app",
+    origin: "https://ecm-art-manjeetmathurs-projects.vercel.app/",
     credentials: true,
   })
 );

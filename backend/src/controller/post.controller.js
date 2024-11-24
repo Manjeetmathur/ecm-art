@@ -201,7 +201,8 @@ const getAllPost = asyncHandler(async(req,res) => {
        try {
               const allPost = await Post.find().sort({createdAt : -1})
               res.status(200).json({
-                     allPost
+                     allPost,
+                     success:true
               })
 
        } catch (error) {
