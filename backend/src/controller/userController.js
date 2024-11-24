@@ -3,7 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { User } from "../model/user.model.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs"
 import { Post } from "../model/post.model.js";
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, password, confirmPassword } = req.body;

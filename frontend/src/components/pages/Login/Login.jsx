@@ -16,7 +16,7 @@ const Login = () => {
               
               try {
                      setLoading(true)
-                     const data = await axios.post("https://ecm-art-backend.vercel.app/api/user/login", 
+                     const data = await axios.post("http://localhost:8000/api/user/login", 
                             {
                                    email,password
                             },
