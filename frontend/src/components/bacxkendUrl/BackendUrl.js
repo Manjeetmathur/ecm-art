@@ -1,1 +1,1 @@
-export const url = "https://ecm-art.onrender.com/api"
+export const url = `https://ecm-art.onrender.com/api/`
