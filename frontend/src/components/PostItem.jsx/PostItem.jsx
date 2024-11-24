@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { setPostData } from "../../store/authSlice";
 import toast from "react-hot-toast";
+import { url } from "../bacxkendUrl/BackendUrl";
 
 const PostItem = () => {
 
@@ -14,7 +15,7 @@ const PostItem = () => {
   useEffect(() => {
     try {
       const fetchdata = async () => {
-        const data = await axios.get(`http://localhost:8000/api/post/get-post-by-id/${params.postId}`)
+        const data = await axios.get(`${url}/post/get-post-by-id/${params.postId}`)
         const res = data.data
         console.log(res);
 
@@ -34,7 +35,7 @@ const PostItem = () => {
   const orderItem = async () => {
     try {
       const data = await axios.post(
-        "http://localhost:8000/api/post/order-item",
+        `${url}/post/order-item`,
         { postId: postData._id, postPrice: postData.postPrice },
         {
           withCredentials: true,

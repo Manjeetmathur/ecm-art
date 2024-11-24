@@ -1,24 +1,36 @@
+import axios from 'axios'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { url } from '../../bacxkendUrl/BackendUrl'
+import toast from 'react-hot-toast'
 const Signup = () => {
        const dispatch = useDispatch()
        const navigate = useNavigate()
        const [email, setEmail] = useState("")
+       const [fullName, setfullName] = useState("")
        const [password, setPassword] = useState("")
-       const handleSignup = async (data) => {
-              const dataResponse = await fetch("http://localhost:5000/api/users/register", {
-                     method: "POST",
-                     headers: {
-                            'content-type': 'application/json',
-                     },
-                     body: JSON.stringify(data)
-              })
-              const dataApi = await dataResponse.json()
-              // if(dataApi.success){
-              //        dispatch(login(useData))
-              //        navigate("/")
-              // }
+       const [confirmPassword, setconfirmPassword] = useState("")
+       const [profile, setProfile] = useState("")
+       const handleSignup = async (e) => {
+              e.preventDefault()
+              const dataResponse = await axios.post(`${url}/user/register`, 
+                     { profile, fullName,email,password,confirmPassword },
+                     {
+                            headers: {
+                                   'content-type': 'application/json',
+                            },
+                     }
+              )
+              const res = dataResponse.data
+              console.log(res);
+              
+              if(res.success){
+                     navigate("/login")
+                     toast.success(res.message)
+              }else{
+                     toast.error(res.message)
+              }
 
        }
        return (
@@ -35,15 +47,23 @@ const Signup = () => {
 
                      <form action="" onSubmit={(e) => handleSignup(e)}>
                             <div className="flex flex-col  m-auto max-w-md w-[400px]">
+                                   <label htmlFor="" className=' text-xl m-2 text-[#683292]'>Profile</label>
+                                   <input
+                                          className=' text-md m-2 text-[#683292] border-2 outline-none 
+                                                        border-[#f83d8e] p-1 px-2 rounded-xl'
+                                          type="file"
+                                          required
+                                          onChange={(e) => setProfile(e.target.files?.[0])}
+                                   />
                                    <label htmlFor="" className=' text-xl m-2 text-[#683292]'>Name</label>
                                    <input
                                           className=' text-md m-2 text-[#683292] border-2 outline-none 
                                                         border-[#f83d8e] p-1 px-2 rounded-xl'
                                           type="text"
                                           placeholder='Enter Your Name...'
-                                          value={email}
+                                          value={fullName}
                                           required
-                                          onChange={(e) => setEmail(e.target.value)}
+                                          onChange={(e) => setfullName(e.target.value)}
                                    />
 
                                    <label htmlFor="" className=' text-xl m-2 text-[#683292]'>Email</label>
@@ -72,9 +92,9 @@ const Signup = () => {
                                                  border-2 outline-none border-[#f83d8e] p-1 px-2'
                                           type="password"
                                           placeholder='Enter Your confirmation Password...'
-                                          value={password}
+                                          value={confirmPassword}
                                           required
-                                          onChange={(e) => setPassword(e.target.value)}
+                                          onChange={(e) => setconfirmPassword(e.target.value)}
                                    />
 
                                    <button

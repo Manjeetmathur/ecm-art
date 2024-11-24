@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { login } from '../../../store/authSlice'
 import toast from 'react-hot-toast'
+import { url } from '../../bacxkendUrl/BackendUrl'
 const Login = () => {
 
        const [email,setEmail] = useState("")
@@ -16,7 +17,7 @@ const Login = () => {
               
               try {
                      setLoading(true)
-                     const data = await axios.post("http://localhost:8000/api/user/login", 
+                     const data = await axios.post(`${url}/user/login`, 
                             {
                                    email,password
                             },
@@ -24,7 +25,7 @@ const Login = () => {
                                    headers: {
                                           'content-type': 'application/json',
                                    },
-                                   withCredentials : 'include'
+                                   withCredentials : 'true'
                             }
                      )
                      const response = data.data

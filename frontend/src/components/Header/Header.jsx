@@ -6,6 +6,7 @@ import { IoReorderThree } from "react-icons/io5";
 import { logout } from "../../store/authSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { url } from "../bacxkendUrl/BackendUrl";
 const Header = () => {
 
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Header = () => {
  
 
   const logoutHandler = async() => {
-    const data = await axios.get("http://localhost:8000/api/user/logout",{
+    const data = await axios.get(`${url}/user/logout`,{
       withCredentials:true,
       withXSRFToken:true,
     })
@@ -25,7 +26,7 @@ const Header = () => {
       toast.success(res.message)
       navigate("/login")
     }else{
-      toast.error(response.message)
+      toast.error(res.message)
     }
   }
 

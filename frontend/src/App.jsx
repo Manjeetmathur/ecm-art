@@ -7,13 +7,14 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setPosts, setUserInfo } from "./store/authSlice";
+import { url } from "./components/bacxkendUrl/BackendUrl";
 function App() {
   const dispatch = useDispatch()
   //all posts
   useEffect(() => {
     try {
       const fetch = async() => {
-        const data = await axios.get("http://localhost:8000/api/post/get-post")
+        const data = await axios.get(`${url}/post/get-post`)
         const res = data.data
         dispatch(setPosts( res.allPost));
       } 
@@ -29,7 +30,7 @@ function App() {
   useEffect(() => {
     try {
       const fetch = async() => {
-        const data = await axios.get("http://localhost:8000/api/user/get-user-details",{withCredentials:true,withXSRFToken:true})
+        const data = await axios.get(`${url}/user/get-user-details`,{withCredentials:true,withXSRFToken:true})
         const res = data.data
         if(res.success){
           dispatch(setUserInfo(res.user))
