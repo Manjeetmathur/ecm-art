@@ -10,7 +10,6 @@ app.use(express.json());
 app.use(
   cors({
     origin: "*",
-    credentials: true,
   })
 );
 import userRoutes from "./routes/userRoutes.js";
