@@ -77,7 +77,7 @@ const Home = () => {
       </div>
       <div className="lg:grid grid-cols-3 mt-10 border-b-2 border-[#f83d8e] ">
         {
-          posts.map((item,idx) => {
+          posts?.map((item,idx) => {
             return <HomeLower key={idx} post={item}/>
           })
         }
