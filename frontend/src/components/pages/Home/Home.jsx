@@ -9,8 +9,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setPosts, setUserInfo } from "./store/authSlice";
-import { url } from "./components/bacxkendUrl/BackendUrl";
+import { setPosts, setUserInfo } from "../../../store/authSlice";
+import { url } from "../../bacxkendUrl/BackendUrl";
 const Home = () => {
   const dispatch = useDispatch()
   //all posts
