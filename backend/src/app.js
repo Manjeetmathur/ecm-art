@@ -9,7 +9,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://ecm-art-manjeetmathurs-projects.vercel.app",
   })
 );
 import userRoutes from "./routes/userRoutes.js";
