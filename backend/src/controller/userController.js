@@ -91,9 +91,7 @@ const login  = asyncHandler(async(req,res) => {
       const token = jwt.sign({userId : user._id},process.env.ACCESS_TOKEN_SECRET,{expiresIn : "1d"})
 
       const tokenOption = {
-        httpOnly : true,
         secure : true,
-        sameSite : 'strict',
         maxAge : 1 * 24 * 60 * 60 * 1000
       }
 

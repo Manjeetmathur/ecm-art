@@ -4,13 +4,14 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 
+app.use(express.json());
+
 app.use(cookieParser());
 
-import path from 'path'
+// import path from 'path'
 
-const __dirname = path.resolve()
+// const __dirname = path.resolve()
 
-app.use(express.json());
 app.use(
   cors({
     origin : "https://ecm-art-frontend.onrender.com",
