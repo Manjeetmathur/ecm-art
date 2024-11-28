@@ -13,43 +13,43 @@ const CreateProduct = () => {
        const navigate = useNavigate()
        const handleSubmit = async (e) => {
               e.preventDefault()
-             try {
-              setLoading(true)
-               const formData = new FormData()
-               formData.append("postImage", image)
-               formData.append("postTitle", postTitle)
-               formData.append("postContent", postContent)
-               formData.append("postPrice", postPrice)
-               formData.append("postCategory", postCategory)
- 
-               const data = await axios.post(`${url}/post/create-post`,
-                      formData,
-                      {
-                             headers: { "content-type": "multipart/form-data" },
-                             withCredentials: true,
-                             withXRFToken: true,
-                      }
-               )
-               const res = data.data
- 
-               console.log("res",res)
- 
-               if (res.success) {
-                     console.log("suc",res);
-                     
-                     navigate('/')
-               }else{
-                     console.log("else" , res);
-                     
-                     toast(res.message)
-               }
-             } catch (error) {
-              console.log("cathc",error);
-              
-              toast(error.message)
-             }finally{
-              setLoading(false)
-             }
+              try {
+                     setLoading(true)
+                     const formData = new FormData()
+                     formData.append("postImage", image)
+                     formData.append("postTitle", postTitle)
+                     formData.append("postContent", postContent)
+                     formData.append("postPrice", postPrice)
+                     formData.append("postCategory", postCategory)
+
+                     const data = await axios.post(`${url}/post/create-post`,
+                            formData,
+                            {
+                                   headers: { "content-type": "multipart/form-data" },
+                                   withCredentials: true,
+                                   withXRFToken: true,
+                            }
+                     )
+                     const res = data.data
+
+                     console.log("res", res)
+
+                     if (res.success) {
+                            console.log("suc", res);
+
+                            navigate('/admin')
+                     } else {
+                            console.log("else", res);
+
+                            toast(res.message)
+                     }
+              } catch (error) {
+                     console.log("cathc", error);
+
+                     toast(error.message)
+              } finally {
+                     setLoading(false)
+              }
 
 
        }

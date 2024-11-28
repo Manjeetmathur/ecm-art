@@ -11,6 +11,8 @@ const PostItem = () => {
   const [cloading, setcLoading] = useState(false);
   const [cart, setcart] = useState(false);
   const params = useParams();
+  console.log("params",params);
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
