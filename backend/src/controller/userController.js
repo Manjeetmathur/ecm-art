@@ -4,11 +4,10 @@ import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { User } from "../model/user.model.js";
 import bcrypt from "bcryptjs"
-import { Post } from "../model/post.model.js";
+import { Admin } from "../model/admin.model.js";
 const registerUser = asyncHandler(async (req, res) => {
-  const { fullName, email, password, confirmPassword } = req.body;
+  const { fullName, email, password, confirmPassword , role } = req.body;
   try {
-
     if (
       [fullName, email, password, confirmPassword].some((field) => field?.trim() === "")
     ) {
@@ -30,15 +29,22 @@ const registerUser = asyncHandler(async (req, res) => {
     const profileLocalPath = req.file?.path;
     
     const profile = await uploadOnCloudinary(profileLocalPath);
-    
+   
     const user = await User.create({
       fullname : fullName,
       profile: profile?.url || " ",
       email,
       password : hashPassword,
     });
-    
-    console.log(user);
+
+    if(role === 'admin'){
+      var admin = await Admin.create({
+        fullname : fullName,
+        profile: profile?.url || " ",
+        email,
+        password : hashPassword,
+      })
+    }
     
     const createdUser = await User.findById(user._id).select(
       "-password"
@@ -51,7 +57,8 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(200).json({ 
       success : true,
       message : "User registered successfully",
-      createdUser
+      createdUser,
+      role : admin ? 'admin' : null
     });
     console.log(createdUser);
 
@@ -68,6 +75,7 @@ const login  = asyncHandler(async(req,res) => {
       if(!email || !password){
         throw new ApiError(402, "Required email or password. . .")
       }
+      const admin = await Admin.findOne({email})
 
       const user = await User.findOne({email})
 
@@ -95,13 +103,20 @@ const login  = asyncHandler(async(req,res) => {
         fullName : user.fullname
       } 
 
-      return  res.cookie('token',token,tokenOption).json({
-        message : "User logged in successfully",
-        success : true,
-        loggedInUser
-      })
-
-
+      if(admin){
+        return  res.cookie('token',token,tokenOption).json({
+          message : "User logged in successfully",
+          success : true,
+          loggedInUser,
+          role : 'admin'
+        })
+      }
+        return  res.cookie('token',token,tokenOption).json({
+          message : "User logged in successfully",
+          success : true,
+          loggedInUser
+        })
+        
     } catch (error) {
       res.json({
         message : error.message
@@ -126,15 +141,41 @@ const logout = asyncHandler (async(req,res) => {
   }
 })
 
+const makeUserAdmin = asyncHandler(async(req,res) => {
+  const {email,password} = req.body
+
+  try {
+    const user = await User.findOne({email})
+    const hashPassword = await bcrypt.hash(password,10)
+    const admin = await Admin.create({
+      fullname : user.fullname,
+      email : user.email,
+      password : hashPassword,
+      profile : user.profile,
+    })
+
+    res.status(200).json({
+      admin,
+      success : true
+    })
+
+  } catch (error) {
+    
+  }
+})
+
 const getUserDetails = asyncHandler(async(req,res) => {
   let user = req.user
-  user = await User.findById(user._id).populate({path : 'order'})
-  console.log(user);
+  const email = user.email
+  user = await User.findOne({email}).populate({path : 'order'}).populate({path : 'cart'})
+  let admin = await Admin.findOne({email})
   
   res.status(200).json({
     success : true,
-    user
+    user,
+    admin
   })
 } )
 
-export { registerUser,login,logout ,getUserDetails};
+
+export { registerUser,login,logout ,getUserDetails,makeUserAdmin};

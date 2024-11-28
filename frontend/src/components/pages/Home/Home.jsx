@@ -6,50 +6,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import HomeMiddle from "../../HomeMiddle/HomeMiddle";
 import HomeLower from "../../HomeMiddle/HomeLower";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setPosts, setUserInfo } from "../../../store/authSlice";
-import { url } from "../../bacxkendUrl/BackendUrl";
 const Home = () => {
-  const dispatch = useDispatch()
-  //all posts
-  useEffect(() => {
-    try {
-      const fetch = async() => {
-        const data = await axios.get(`${url}/post/get-post`)
-        const res = data.data
-        console.log(res);
-
-        dispatch(setPosts( res.allPost));
-      } 
-      fetch()
-    } catch (error) {
-      console.log(error);
-      
-    }
-    
-  },[])
-
-  //userDetails
-  useEffect(() => {
-    try {
-      const fetch = async() => {
-        const data = await axios.get(`${url}/user/get-user-details`,{withCredentials:true,withXSRFToken:true})
-        const res = data.data
-        if(res.success){
-          dispatch(setUserInfo(res.user))
-        }
-        // dispatch(setPosts( res.allPost));
-        
-      } 
-      fetch()
-    } catch (error) {
-      console.log(error);
-      
-    }
-    
-  },[])
 
 
   const {posts} =  useSelector(st => st.auth)
@@ -62,11 +19,13 @@ const Home = () => {
         <p className="text-[#683292] ">something something something</p>
         <button className="btn my-4 px-2 md:text-xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
       </div>
+      <div className="p-5 ">
       <img
         src="https://wallpaperaccess.com/full/181724.jpg"
         alt=""
-        className="w-full md:h-[30rem] rounded-b-lg my-7 border-[2px] border-[#683292]"
+        className="w-full md:h-[30rem] rounded-lg mb-7  lg:h-[35rem] shadow-2xl "
       />
+      </div>
 
       <h1 className="text-4xl font-semibold flex justify-center">
         Our Popular Art Work
@@ -74,16 +33,17 @@ const Home = () => {
       <h2 className="flex justify-center m-4 text-[#683292]">
         Ckeck Out Our Favourite Art Work
       </h2>
-      <div className="flex flex-col md:flex-row justify-center my-5 border-b-2 border-[#683292]">
+      <div className="flex flex-col md:flex-row justify-center my-5 border-b-2 shadow-xl">
        <HomeMiddle />
       </div>
-      <div className="lg:grid grid-cols-3 mt-10 border-b-2 border-[#f83d8e] ">
+      <div className="md:grid lg:grid-cols-3 gap-5 md:grid-cols-2 mt-10 shadow-xl pb-6">
         {
           posts?.map((item,idx) => {
             return <HomeLower key={idx} post={item}/>
           })
         }
       </div>
+      
     </div>
   );
 };

@@ -1,5 +1,7 @@
 
 import mongoose from "mongoose";
+// import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2"
+
 const PostSchema = mongoose.Schema({
        postImage : {
               type : String,
@@ -15,11 +17,19 @@ const PostSchema = mongoose.Schema({
               type : String,
               required : true,
        },
+       postCategory : {
+              type : String,
+              required : true,
+       },
+       stock : {
+              type : Number,
+              required :true,
+       },
        owner : {
               type : mongoose.Schema.Types.ObjectId,
-              ref : " User"
+              ref : "Admin"
        },
 
 })
-
+// PostSchema.plugin(mongooseAggregatePaginate)
 export const Post = mongoose.model("Post",PostSchema)

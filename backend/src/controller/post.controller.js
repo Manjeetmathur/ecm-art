@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Cart } from "../model/Cart.model.js";
 import { Order } from "../model/Oreder.model.js";
 import { Post } from "../model/post.model.js";
@@ -6,14 +7,22 @@ import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import sendMail from "../utils/Sendmail.js";
+import { Admin } from "../model/admin.model.js";
 
 const createPost = asyncHandler(async (req, res) => {
-       const { postContent,postPrice,postTitle } = req.body
+       const { postContent, postPrice, postTitle, postCategory, stock } = req.body
 
        try {
-              const user = req.user
-              if (!user) {
-                     throw new ApiError(404, "user not found")
+              const admin = req.user
+
+              const isAdmin = await Admin.findById(admin._id)
+
+              if (!isAdmin) {
+                     throw new ApiError(404, "admin not found")
+              }
+
+              if (!postContent || !postPrice || !postCategory || !postTitle) {
+                     throw new ApiError(401, 'All fields are required . . .')
               }
 
               const postImagePath = req?.file?.path
@@ -28,10 +37,13 @@ const createPost = asyncHandler(async (req, res) => {
                      postContent,
                      postPrice,
                      postTitle,
-                     postImage: postImage.secure_url
+                     postCategory,
+                     stock: 1,
+                     postImage: postImage.secure_url,
+                     owner: admin._id
               })
-              await user.posts.push(post._id)
-              await user.save()
+              await admin.posts.push(post._id)
+              await admin.save()
               res.status(200).json({
                      success: true,
                      message: "post uploaded",
@@ -47,22 +59,23 @@ const createPost = asyncHandler(async (req, res) => {
 
 const deletePost = asyncHandler(async (req, res) => {
        const { postId } = req.body
-       const user = req.user
+       const admin = req.user
        try {
 
-              if (!user) {
-                     throw new ApiError(404, "user not found")
+              if (!admin) {
+                     throw new ApiError(404, "admin not found")
               }
               if (!postId) {
                      throw new ApiError(404, "post not found")
               }
 
               const post = await Post.findByIdAndDelete(postId)
-              if(!post){
+
+              if (!post) {
                      throw new ApiError("Post not found . . .")
               }
-              user.posts = user.posts.filter(id => id.toString() !== postId.toString())
-              await user.save()
+              admin.posts = admin.posts.filter(id => id.toString() !== postId.toString())
+              await admin.save()
               res.status(200).json({
                      message: "post deleted ",
                      success: true,
@@ -74,20 +87,22 @@ const deletePost = asyncHandler(async (req, res) => {
        }
 })
 
-const addOrRemoveToCart = asyncHandler(async (req, res) => {
+const addToCart = asyncHandler(async (req, res) => {
        const { postId } = req.body
        const user = req.user
-
+       
        try {
               if (!user) {
                      throw new ApiError(404, "user not found")
               }
               if (!postId) {
-                     throw new ApiError(404, "user not found")
+                     throw new ApiError(404, "product not found")
               }
 
-              const cartPost = await Cart.findOne({ post: postId })
+              const cartPost = await Cart.findOne({ owner: user._id, post: postId })
 
+              console.log(cartPost);
+              
               if (!cartPost) {
                      const cartpost = await Cart.create({
                             post: postId,
@@ -101,17 +116,8 @@ const addOrRemoveToCart = asyncHandler(async (req, res) => {
                             cartpost
                      })
 
-              } else {
-                     
-                     await Cart.findByIdAndDelete( cartPost._id)
-
-                     user.cart = user.cart.filter(id => id.toString() !== cartPost._id.toString())
-                     await user.save()
-
-                     res.status(200).json({
-                            message: "remove from cart",
-                            success: true
-                     })
+              }else{
+                     throw new ApiError(500,"Already added to cart")
               }
 
        } catch (error) {
@@ -122,9 +128,84 @@ const addOrRemoveToCart = asyncHandler(async (req, res) => {
 
 
 })
+const removeToCart = asyncHandler(async (req, res) => {
+       const { postId } = req.body
+       const user = req.user
+
+       try {
+              if (!user) {
+                     throw new ApiError(404, "user not found")
+              }
+              if (!postId) {
+                     throw new ApiError(404, "product not found")
+              }
+
+              const cartPost = await Cart.findOne({ owner: user._id, post: postId })
+
+              if(cartPost){
+                     await Cart.findByIdAndDelete(cartPost._id)
+
+                     user.cart = user.cart.filter(id => id.toString() !== cartPost._id.toString())
+                     await user.save()
+                     res.status(200).json({
+                            message: "remove from cart",
+                            success: true
+                     })
+              }else{
+                     throw new Error("Product is not in cart")
+              }
+
+            
+            
+
+       } catch (error) {
+              res.json({
+                     message: error.message
+              })
+       }
+
+
+})
+
+const getUserCartItem = asyncHandler(async (req, res) => {
+       const user = req.user
+
+       try {
+              const userId = user._id
+
+              const cartItems = await Cart.aggregate([
+                     {
+                            $match: {
+                                   owner: new mongoose.Types.ObjectId(userId)
+                            }
+                     },
+                     {
+                            $lookup: {
+                                   from: "posts",
+                                   localField: "post",
+                                   foreignField: "_id",
+                                   as: "result"
+                            }
+                     },
+                     // {
+                     //        $project: {
+                     //               result: "$result"
+                     //        }
+                     // },
+              ])
+              res.json({
+                     cartItems,
+                     success:true
+              })
+
+
+       } catch (error) {
+
+       }
+})
 
 const orderItem = asyncHandler(async (req, res) => {
-       const { postId,postPrice } = req.body
+       const { postId, postPrice, quantity } = req.body
        const user = req.user
 
        try {
@@ -135,25 +216,32 @@ const orderItem = asyncHandler(async (req, res) => {
                      throw new ApiError(404, "post not found")
               }
 
+              const admin = await Admin.findOne({ posts: postId })
               const p = await Post.findById(postId)
 
-              if(!p){
+              if (!p) {
                      throw new ApiError("Post not found")
               }
 
               const orderpost = await Order.create({
-                     post: postId,
+                     post: [
+                            { post: postId },
+                            { quantity: quantity || 1 }
+                     ],
                      postPrice,
-                     owner: user._id
+                     user: user._id
               })
               user.order.push(orderpost._id)
               await user.save()
-              
+
+              admin.orders.push(orderpost._id)
+              await admin.save()
+
               let para = `thanks for your order for ${p.postContent} 
                                     rupees ${postPrice} `
               sendMail(para, user.email)
               sendMail(user.email, "kumanjeet779@gmail.com")
-              
+
               res.status(200).json({
                      message: "Order Placed",
                      success: true,
@@ -168,72 +256,135 @@ const orderItem = asyncHandler(async (req, res) => {
 
 })
 
-const cancelOrder = asyncHandler(async(req,res) => {
-       const {orderId} = req.body
+const cancelOrder = asyncHandler(async (req, res) => {
+       const { orderId } = req.body
        const user = req.user
        try {
-              if(!orderId){
-                     throw new ApiError(401,"Order not found");
+              if (!orderId) {
+                     throw new ApiError(401, "Order not found");
               }
               const order = await Order.findByIdAndDelete(orderId)
+              const admin = await Admin.findOne({ orders: orderId })
 
-              if(!order){
+              if (!order) {
                      throw new ApiError("Order not found")
               }
 
               user.order = user.order.filter(id => id.toString() !== orderId.toString())
-
               await user.save()
+
+              admin.orders = admin.orders.filter(id => id.toString() !== orderId.toString())
+              await admin.save()
 
               res.status(200).json({
                      message: "order cancel",
-                     success : true
+                     success: true
               })
-              
+
        } catch (error) {
               res.json({
-                     message : error.message
+                     message: error.message
               })
        }
 })
 
-const getAllPost = asyncHandler(async(req,res) => {
+const getorderDetails = asyncHandler(async (req, res) => {
+       const user = req.user
        try {
-              const allPost = await Post.find().sort({createdAt : -1})
+              const admin = await Admin.findOne({ email: user.email })
+              if (!admin) {
+                     throw new ApiError("htt saala")
+              }
+              const orderDetails = await Admin.aggregate([
+                     {
+                            $lookup: {
+                                   from: "orders",
+                                   localField: "orders",
+                                   foreignField: "_id",
+                                   as: "result",
+                            },
+                     },
+                     {
+                            $unwind: '$result'
+                     },
+              ])
+              // console.log(orderDetails);
+              
+              const orderuserDetails = await Order.aggregate([
+                     {
+                            $lookup: {
+                                   from: "users",
+                                   localField: "user",
+                                   foreignField: "_id",
+                                   as: "rest"
+                            }
+                     },
+                     {
+                            $unwind: '$rest'
+                     },
+                     // {
+                     //        $project: {
+                     //               "data": "$rest",
+
+                     //        }
+                     // }
+
+              ])
+              console.log(orderuserDetails);
+              
               res.status(200).json({
-                     allPost,
-                     success:true
+                     success: true,
+                     d1 : orderDetails,
+                     d2 : orderuserDetails
               })
 
        } catch (error) {
-              
+              res.json({
+                     message: error.message
+              })
        }
 })
 
-const getPostById = asyncHandler(async(req,res) => {
+const getAllPost = asyncHandler(async (req, res) => {
        try {
-              const {postId} = req.params
+              const allPost = await Post.find().sort({ createdAt: -1 })
+              res.status(200).json({
+                     allPost,
+                     success: true
+              })
+
+       } catch (error) {
+
+       }
+})
+
+const getPostById = asyncHandler(async (req, res) => {
+       try {
+              const { postId } = req.params
               console.log(postId);
-              
+
               const post = await Post.findById(postId)
 
               res.status(200).json({
-                     message:"fetched",
-                     success:true,
+                     message: "fetched",
+                     success: true,
                      post
               })
 
        } catch (error) {
-              
+
        }
 })
 
 export {
        createPost,
        deletePost,
-       addOrRemoveToCart,
+       addToCart,
+       removeToCart,
        cancelOrder,
        orderItem,
        getAllPost,
-       getPostById
+       getPostById,
+       getUserCartItem,
+       getorderDetails
 }

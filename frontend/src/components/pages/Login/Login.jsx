@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { login } from '../../../store/authSlice'
+import { login, setAdmin } from '../../../store/authSlice'
 import toast from 'react-hot-toast'
 import { url } from '../../bacxkendUrl/BackendUrl'
 const Login = () => {
@@ -30,6 +30,10 @@ const Login = () => {
                      )
                      const response = data.data
                      if (response.success) {
+                            if(response.role === 'admin'){
+                                   
+                                   dispatch(setAdmin(response.role))
+                            }
                             dispatch(login(response.loggedInUser))
                             toast.success(response.message)
                             navigate("/")
@@ -44,7 +48,7 @@ const Login = () => {
 
        }
        return (
-              <div className='border-y-2 border-[#683292]  my-10'>
+              <div className='shadow-xl pb-5  mt-10'>
                      <h2 className=' text-xl m-auto max-w-md my-6 rounded-xl p-4 text-[#683292]'>Signing In To Your Account...</h2>
                      <p className=' text-xl m-auto max-w-md my-4 text-[#683292]'>
 

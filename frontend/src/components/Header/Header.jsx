@@ -7,59 +7,49 @@ import { logout } from "../../store/authSlice";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { url } from "../bacxkendUrl/BackendUrl";
-const Header = () => {
+import Admin from "../Admin/Admin";
 
+const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {status} = useSelector(st => st.auth)
- 
+  const { status, admin } = useSelector((st) => st.auth);
 
-  const logoutHandler = async() => {
-    const data = await axios.get(`${url}/user/logout`,{
-      withCredentials:true,
-      withXSRFToken:true,
-    })
-    const res = data.data
-    
-    if(res.success){
-      dispatch(logout())
-      toast.success(res.message)
-      navigate("/login")
-    }else{
-      toast.error(res.message)
+  const logoutHandler = async () => {
+    const data = await axios.get(`${url}/user/logout`, {
+      withCredentials: true,
+      withXSRFToken: true,
+    });
+    const res = data.data;
+
+    if (res.success) {
+      dispatch(logout());
+      toast.success(res.message);
+      navigate("/login");
+    } else {
+      toast.error(res.message);
     }
-  }
+  };
 
   return (
-    <nav className="bg-[#fffff] mt-4">
-      <div className={`flex  justify-around md:text-xl`}>
-        <div className="hidden md:flex">
-            <Link to={"/"} className="">Logo</Link>
-        </div>
-        <div className="flex justify-around md: gap-10">
-          <div className="">
-            <Link to={"/"}>Home</Link>
-          </div>
-          <div className="">
-            <Link to={"/about"}>About</Link>
-          </div>
-          <div className="">
-            <Link to={"/"}>Explore</Link>
-          </div>
-          <div className="">
-            <div className=" ">
-              {
-                status ? 
-                <div className="cursor-pointer" onClick={logoutHandler}>Logout</div> 
-                :
-                
-                <Link to={"/login"}>Login</Link>
-              }
-            </div>
-            {/* <div className="header-text  ">
-                <button onClick={handleLogout}>Logout</button>
-              </div> */}
-          </div>
+    <nav className="bg-white shadow-md">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link to="/" className="text-xl font-bold md:block hidden">
+          {/* Replace with your logo component or image */}
+          Your Logo
+        </Link>
+        <div className="flex items-center gap-8 mx-auto md:gap-14 md:m-0">
+          <Link to="/" className="text-gray-700 hover:text-gray-900 mr-4">Home</Link>
+          <Link to="/order-page" className="text-gray-700 hover:text-gray-900 mr-4">Orders</Link>
+          {admin ? (
+            <Link to="/admin" className="text-gray-700 hover:text-gray-900 mr-4">Dashboard</Link>
+          ) : (
+            <Link to="/cart" className="text-gray-700 hover:text-gray-900 mr-4">Cart</Link>
+          )}
+          {status ? (
+            <button onClick={logoutHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Logout</button>
+          ) : (
+            <Link to="/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login</Link>
+          )}
         </div>
       </div>
     </nav>

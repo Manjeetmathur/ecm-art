@@ -1,49 +1,43 @@
 import mongoose, { Schema } from "mongoose";
 
-const userSchema  = new Schema(
+const userSchema = new Schema(
        {
-              phone : {
-                     type : String,
+              phone: {
+                     type: String,
               },
-              fullname : {
-                     type : String,
-                     required : true,
-                     trim : true
+              fullname: {
+                     type: String,
+                     required: true,
+                     trim: true
               },
-              email : {
-                     type : String,
-                     required : true,
-                     unique : true,
+              email: {
+                     type: String,
+                     required: true,
+                     unique: true,
               },
-              password : {
-                     type : String,
-                     required : [true, "Password is required..."]
+              password: {
+                     type: String,
+                     required: [true, "Password is required..."]
               },
-              profile : {
-                     type : String,
+              profile: {
+                     type: String,
               },
-              posts:[
+              cart: [
                      {
-                            type : mongoose.Schema.Types.ObjectId,
-                            ref : "Post"
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: "Cart"
                      }
               ],
-              cart:[
+              order: [
                      {
-                            type : mongoose.Schema.Types.ObjectId,
-                            ref : "Cart"
-                     }
-              ],
-              order:[
-                     {
-                            type : mongoose.Schema.Types.ObjectId,
-                            ref : "Order"
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: "Order"
                      }
               ],
        },
        {
-              timestamps : true,
+              timestamps: true,
        }
 );
 
-export const User = mongoose.model("User",userSchema)
+export const User = mongoose.model("User", userSchema)

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+// import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2"
 
 const CartSchema = mongoose.Schema({
        post:{
@@ -12,4 +13,5 @@ const CartSchema = mongoose.Schema({
        }
 })
 
+// CartSchema.plugin(mongooseAggregatePaginate)
 export const Cart = mongoose.model("Cart", CartSchema)

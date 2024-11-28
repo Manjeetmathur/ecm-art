@@ -9,18 +9,18 @@ const HomeMiddle = () => {
                                    <img
                                           src="https://wallpaperaccess.com/full/181724.jpg"
                                           alt=""
-                                          className="w-[300px] rounded-lg border-[2px] hover:scale-[103%] cursor-pointer border-[#683292]"
+                                          className="w-[300px] rounded-lg  hover:scale-[105%] transition-[0.3s] cursor-pointer  shadow-2xl"
                                    />
                             </Link>
                             <img
                                    src="https://wallpaperaccess.com/full/181724.jpg"
                                    alt=""
-                                   className="lg:w-[320px] w-[300px] rounded-lg  hover:scale-[103%] cursor-pointer border-[2px] md:mb-24 border-[#683292]"
+                                   className="lg:w-[320px] w-[300px] rounded-lg  hover:scale-[103%] cursor-pointer shadow-2xl md:mb-24 border-[#683292]"
                             />
                             <img
                                    src="https://wallpaperaccess.com/full/181724.jpg"
                                    alt=""
-                                   className="w-[300px] rounded-lg border-[2px] hover:scale-[103%] cursor-pointer border-[#683292]"
+                                   className="w-[300px] rounded-lg  hover:scale-[103%] cursor-pointer  shadow-2xl"
                             />
                             
                      </div>

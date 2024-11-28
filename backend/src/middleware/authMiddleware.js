@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiError } from "../utils/ApiError.js"
 import { User } from "../model/user.model.js"
+import { Admin } from "../model/admin.model.js";
 
 
 export const verifyJwt = asyncHandler(async(req,res,next) => {
@@ -17,7 +18,17 @@ export const verifyJwt = asyncHandler(async(req,res,next) => {
               if(!user){
                      throw new ApiError(401,"Invalid Acsess token . . .")
               }
-              req.user = user
+              const email = user.email
+              const admin = await Admin.findOne({email})
+              if(admin){
+                     req.user = admin
+                     
+              }else{
+                     req.user = user
+                     console.log("hlo");
+                     
+              }
+              
               next();
        } catch (error) {
               res.json({
