@@ -22,6 +22,7 @@ const PostItem = () => {
           `${url}/post/get-post-by-id/${params.postId}`
         );
         const res = data.data;
+console.log(res);
 
         if (res.success) {
           dispatch(setPostData(res.post));
