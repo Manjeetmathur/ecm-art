@@ -24,10 +24,10 @@ app.use("/api/user", userRoutes);
 import postRouter from "./routes/post.routes.js"
 app.use("/api/post",postRouter)
 
-app.use(express.static(path.join(__dirname,"/frontend/dist")))
-app.get("*",(req,res) => {
-  res.sendFile(path.resolve(__dirname,"/frontend","dist","index.html"))
-})
+// app.use(express.static(path.join(__dirname,"/frontend/dist")))
+// app.get("*",(req,res) => {
+//   res.sendFile(path.resolve(__dirname,"/frontend","dist","index.html"))
+// })
 
 export { app };
 //http://localhost:5173/
