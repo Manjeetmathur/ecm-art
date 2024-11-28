@@ -8,32 +8,40 @@ const CreateProduct = () => {
        const [postContent, setpostContent] = useState("")
        const [postPrice, setpostPrice] = useState("")
        const [postCategory, setpostCategory] = useState("")
+       const [loading, setLoading] = useState(false)
        const navigate = useNavigate()
        const handleSubmit = async (e) => {
               e.preventDefault()
-              const formData = new FormData()
-              formData.append("postImage", image)
-              formData.append("postTitle", postTitle)
-              formData.append("postContent", postContent)
-              formData.append("postPrice", postPrice)
-              formData.append("postCategory", postCategory)
-
-              const data = await axios.post(`${url}/post/create-post`,
-                     formData,
-                     {
-                            headers: { "content-type": "multipart/form-data" },
-                            withCredentials: true,
-                            withXRFToken: true,
-                     }
-              )
-              const res = data.data
-
-              console.log(res)
-
-              if (res.success) {
-
-                     navigate('/')
-              }
+             try {
+              setLoading(true)
+               const formData = new FormData()
+               formData.append("postImage", image)
+               formData.append("postTitle", postTitle)
+               formData.append("postContent", postContent)
+               formData.append("postPrice", postPrice)
+               formData.append("postCategory", postCategory)
+ 
+               const data = await axios.post(`${url}/post/create-post`,
+                      formData,
+                      {
+                             headers: { "content-type": "multipart/form-data" },
+                             withCredentials: true,
+                             withXRFToken: true,
+                      }
+               )
+               const res = data.data
+ 
+               console.log(res)
+ 
+               if (res.success) {
+ 
+                      navigate('/')
+               }
+             } catch (error) {
+              
+             }finally{
+              setLoading(false)
+             }
 
 
        }
@@ -74,7 +82,11 @@ const CreateProduct = () => {
                                           </select>
                                    </div>
 
-                                   <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Post</button>
+                                   <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                          {
+                                                 loading ? "please wait " : 'Create Post'
+                                          }
+                                   </button>
                             </form>
                      </div>
               </div>
