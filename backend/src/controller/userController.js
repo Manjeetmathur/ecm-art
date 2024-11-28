@@ -92,7 +92,7 @@ const login  = asyncHandler(async(req,res) => {
 
       const tokenOption = {
         secure : true,
-        sameStite : "none",
+        sameSite : "none",
         httpOnly:true,
         maxAge : 1 * 24 * 60 * 60 * 1000
       }
