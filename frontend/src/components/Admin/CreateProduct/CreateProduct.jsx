@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { url } from '../../bacxkendUrl/BackendUrl'
 import { Navigate, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 const CreateProduct = () => {
        const [image, setImage] = useState("")
        const [postTitle, setpostTitle] = useState("")
@@ -36,9 +37,11 @@ const CreateProduct = () => {
                if (res.success) {
  
                       navigate('/')
+               }else{
+                     toast(res.message)
                }
              } catch (error) {
-              
+              toast(error.message)
              }finally{
               setLoading(false)
              }
