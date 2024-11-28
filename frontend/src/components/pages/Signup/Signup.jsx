@@ -46,7 +46,7 @@ const Signup = () => {
                      { }
 
                      <form action="" onSubmit={(e) => handleSignup(e)}>
-                            <div className="flex flex-col  m-auto max-w-md w-[400px]">
+                            <div className="flex flex-col  m-auto max-w-md w-[300px]">
                                    <label htmlFor="" className=' text-xl m-2 text-[#683292]'>Profile</label>
                                    <input
                                           className=' text-md m-2 text-[#683292] border-2 outline-none 

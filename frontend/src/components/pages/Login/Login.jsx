@@ -57,7 +57,7 @@ const Login = () => {
                             </Link>
                      </p>
                      <form action="" onSubmit={(e) => handleLogin(e)}>
-                            <div className="flex flex-col  m-auto max-w-md w-[400px]">
+                            <div className="flex flex-col  m-auto max-w-md w-[300px]">
 
                                    <label htmlFor="" className=' text-xl m-2 text-[#683292]'>Email</label>
                                    <input 
