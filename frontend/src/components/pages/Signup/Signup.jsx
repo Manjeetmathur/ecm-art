@@ -36,7 +36,7 @@ const Signup = () => {
        return (
               <div className='border-y-2 border-[#683292]  my-10'>
                      <h2 className=' text-xl m-auto max-w-md my-6 rounded-xl p-4 text-[#683292]'>Signing Up To Your Account...</h2>
-                     <p className=' text-xl m-auto max-w-md my-4 text-[#683292]'>
+                     <p className=' text-xl m-auto max-w-md my-4 px-4 text-[#683292]'>
 
                             <Link to={"/login"}>
                                    Already Have An Account ? Sign In

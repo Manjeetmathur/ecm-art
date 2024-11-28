@@ -50,7 +50,7 @@ const Login = () => {
        return (
               <div className='shadow-xl pb-5  mt-10'>
                      <h2 className=' text-xl m-auto max-w-md my-6 rounded-xl p-4 text-[#683292]'>Signing In To Your Account...</h2>
-                     <p className=' text-xl m-auto max-w-md my-4 text-[#683292]'>
+                     <p className=' text-xl m-auto max-w-md my-4 text-[#683292] px-4'>
 
                             <Link to={"/signup"}>
                                    Dont't Have Account ? Sign Up
