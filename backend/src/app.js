@@ -13,7 +13,6 @@ const __dirname = path.resolve()
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://ecm-art-frontend.onrender.com",
     credentials: true,
   })
 );
