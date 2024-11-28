@@ -14,6 +14,9 @@ const createPost = asyncHandler(async (req, res) => {
 
        try {
               const admin = req.user
+              if (!admin) {
+                     throw new ApiError(404, "admin not found")
+              }
 
               const isAdmin = await Admin.findById(admin._id)
 

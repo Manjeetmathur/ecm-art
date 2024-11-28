@@ -32,15 +32,20 @@ const CreateProduct = () => {
                )
                const res = data.data
  
-               console.log(res)
+               console.log("res",res)
  
                if (res.success) {
- 
-                      navigate('/')
+                     console.log("suc",res);
+                     
+                     navigate('/')
                }else{
+                     console.log("else" , res);
+                     
                      toast(res.message)
                }
              } catch (error) {
+              console.log("cathc",error);
+              
               toast(error.message)
              }finally{
               setLoading(false)
@@ -85,7 +90,7 @@ const CreateProduct = () => {
                                           </select>
                                    </div>
 
-                                   <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                           {
                                                  loading ? "please wait " : 'Create Post'
                                           }
