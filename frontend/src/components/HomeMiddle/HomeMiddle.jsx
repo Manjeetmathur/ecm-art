@@ -5,7 +5,7 @@ const HomeMiddle = () => {
        return (
               <div className="">
                      <div className="flex flex-col lg:flex-row relative m-5 mb-10 items-center gap-10">
-                            <Link to = {"/post-item"}>
+                            <Link to = {"/"}>
                                    <img
                                           src="https://wallpaperaccess.com/full/181724.jpg"
                                           alt=""
