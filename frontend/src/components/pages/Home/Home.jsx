@@ -15,7 +15,7 @@ const Home = () => {
     <div className="">
 
       <div className=" absolute top-[150px] md:top-[250px]  md:left-[150px] lg:left-[200px] left-[40px]">
-        <h1 className="text-2xl font-semibold w-[300px] md:w-[450px] lg:w-[550px] my-2">Sketch Your Art With Manjeet</h1>
+        <h1 className="text-2xl font-semibold w-[200px] md:w-[450px] lg:w-[550px] my-2">Sketch Your Art With Manjeet</h1>
         <p className="text-[#683292] ">something something something</p>
         <button className="btn my-4 px-2 text-md md:text-xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
       </div>
