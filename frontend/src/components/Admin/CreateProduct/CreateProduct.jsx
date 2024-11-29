@@ -31,13 +31,14 @@ const CreateProduct = () => {
                             }
                      )
                      const res = data.data
-
-                     console.log("res", res)
-
                      if (res.success) {
                             console.log("suc", res);
-
-                            navigate('/admin')
+                            toast.success(res.message)
+                            setImage('')
+                            setpostCategory('')
+                            setpostContent('')
+                            setpostPrice("")
+                            setpostTitle('')
                      } else {
                             console.log("else", res);
 

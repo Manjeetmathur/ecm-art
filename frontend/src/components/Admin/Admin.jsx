@@ -20,7 +20,7 @@ const Admin = () => {
 
   console.log(posts)
   return (
-    <div className="" >
+    <div className="" id='admin-dash'>
       
       <div className="flex items-center justify-center flex-col">
         <div className={`flex mx-auto gap-4 mt-5` }>
