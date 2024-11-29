@@ -26,7 +26,7 @@ const Login = () => {
                                           'content-type': 'application/json',
                                    },
                                    // mode: 'cors',
-                                   withCredentials:"true"
+                                   withCredentials:"true",
                             }
                      )
                      const response = data.data
