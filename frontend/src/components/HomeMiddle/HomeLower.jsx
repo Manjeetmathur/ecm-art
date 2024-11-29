@@ -68,7 +68,7 @@ const HomeLower = ({ post }) => {
                      
 
               } catch (error) {
-
+                     toast.error(error.message);
               }finally{
                      setcLoading(false)
               }
