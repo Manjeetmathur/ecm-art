@@ -93,9 +93,9 @@ const login  = asyncHandler(async(req,res) => {
       const tokenOption = {
         secure : true,
         httpOnly:true,
-        // sameSite : "none",
+        sameSite : "none",
         maxAge : 1*24*60*60*1000,
-        // crossSite : 'true'
+        crossSite : 'true'
       }
 
       const loggedInUser = {

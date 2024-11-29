@@ -102,7 +102,7 @@ console.log(res);
   return (
     <div className="m-10 md:w-[90%] flex flex-col md:flex-row gap-5 justify-center">
       <img
-        src={postData.postImage}
+        src={postData?.postImage}
         alt=""
         className="h-[300px] lg:h-[350px] rounded-lg shadow-md"
       />
