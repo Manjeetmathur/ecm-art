@@ -23,10 +23,10 @@ const Admin = () => {
     <div className="" >
       
       <div className="flex items-center justify-center flex-col">
-        <div className={`flex mx-auto gap-5 mt-5` }>
-          <h3 onClick={() => setActive("profile")}>{userInfo.fullname}</h3>
+        <div className={`flex mx-auto gap-4 mt-5` }>
+          <h3 onClick={() => setActive("profile")}>profile</h3>
           <p onClick={() => setActive("posts")}>posts</p>
-          <p onClick={() => setActive("create-product")}>create Product</p>
+          <p onClick={() => setActive("create-product")}>create</p>
           <p onClick={() => setActive("orders")}>orders</p>
         </div>
         <div className="p-5 m-5 ">

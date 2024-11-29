@@ -32,24 +32,24 @@ const Header = () => {
 
   return (
     <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div className=" mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-xl font-bold md:block hidden">
           {/* Replace with your logo component or image */}
           Your Logo
         </Link>
-        <div className="flex items-center gap-8  md:gap-14">
+        <div className="flex mx-auto items-center gap-6  md:gap-14">
           <Link to="/" className="text-gray-700 hover:text-gray-900 ">Home</Link>
           
              
           {status ? (
-           <div className="flex items-center">
+           <div className="flex mx-auto gap-10 items-center ">
              
-             <Link to="/order-page" className="text-gray-700 hover:text-gray-900 mr-4">Orders</Link>
+             <Link to="/order-page" className="text-gray-700 hover:text-gray-900 ">Orders</Link>
              { admin ? 
-              <Link to="/admin" className="text-gray-700 hover:text-gray-900 mr-4">Dashboard</Link>
+              <Link to="/admin" className="text-gray-700 hover:text-gray-900 ">Dashboard</Link>
               : 
-              <Link to="/cart" className="text-gray-700 hover:text-gray-900 pr-6"> Cart </Link>}
-              <button onClick={logoutHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 mr-2 rounded">Logout</button>
+              <Link to="/cart" className="text-gray-700 hover:text-gray-900 "> Cart </Link>}
+              <button onClick={logoutHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Logout</button>
              
            </div>
            ) : 
