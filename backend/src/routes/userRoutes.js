@@ -8,7 +8,7 @@ const router = Router();
 
 router.route("/register").post( upload.single("profile") ,registerUser)
 router.route("/login").post(login)
-router.route("/logout").post( verifyJwt ,logout)
+router.route("/logout").get( verifyJwt ,logout)
 router.route("/get-user-details").get( verifyJwt ,getUserDetails)
 router.route("/make-user-admin").post( verifyJwt ,makeUserAdmin)
 
