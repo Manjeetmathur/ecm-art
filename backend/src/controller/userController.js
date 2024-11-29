@@ -94,7 +94,8 @@ const login  = asyncHandler(async(req,res) => {
         secure : true,
         httpOnly:true,
         sameSite : "none",
-        expiresIn : 1*24*60*60*1000
+        expiresIn :"1*24*60*60*1000",
+        crossSite : 'true'
       }
 
       const loggedInUser = {
