@@ -91,7 +91,7 @@ const login  = asyncHandler(async(req,res) => {
       const token = jwt.sign({userId : user._id},process.env.ACCESS_TOKEN_SECRET,{expiresIn : "1d"})
 
       const tokenOption = {
-        // domain :'localhost',
+        // domain :'ecm-art-frontend.vercel.app',
         secure : true,
         httpOnly:true,
         sameSite : "none",
