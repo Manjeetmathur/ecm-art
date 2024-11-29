@@ -17,6 +17,7 @@ const CartProduct = ({ product }) => {
                             `${url}/post/order-item`,
                             { postId: postData._id, postPrice: postData.postPrice },
                             {
+                                   
                                    withCredentials: true,
                                    withXSRFToken: true,
                                    headers: { "content-type": "application/json" },
