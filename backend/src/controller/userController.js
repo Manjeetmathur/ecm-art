@@ -127,10 +127,7 @@ const login  = asyncHandler(async(req,res) => {
 
 const logout = asyncHandler (async(req,res) => {
   try {
-    return res.clearCookie('token',{
-      // domain : "http://localhost:5173",
-      maxAge : -1
-    }).json({
+    return res.clearCookie('token').json({
       success : true,
       message : "user logged out successfully . . . "
     })
