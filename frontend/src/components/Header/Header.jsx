@@ -15,13 +15,7 @@ const Header = () => {
   const { status, admin } = useSelector((st) => st.auth);
 
   const logoutHandler = async () => {
-    const data = await axios.get(`${url}/user/logout`,
-      {
-        
-        withXRFToken : 'true',
-        withCredentials:"true"
-      }
-    );
+    const data = await axios.get(`${url}/user/logout`);
     const res = data.data;
 
     if (res.success) {
