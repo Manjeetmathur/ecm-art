@@ -37,23 +37,28 @@ const Header = () => {
           {/* Replace with your logo component or image */}
           Your Logo
         </Link>
-        <div className="flex items-center gap-8 mx-auto md:gap-14 md:m-0">
-          <Link to="/" className="text-gray-700 hover:text-gray-900 mr-4">Home</Link>
-          <Link to="/order-page" className="text-gray-700 hover:text-gray-900 mr-4">Orders</Link>
-          {admin ? (
-            <Link to="/admin" className="text-gray-700 hover:text-gray-900 mr-4">Dashboard</Link>
-          ) : (
-            <Link to="/cart" className="text-gray-700 hover:text-gray-900 mr-4">Cart</Link>
-          )}
+        <div className="flex items-center gap-8  md:gap-14">
+          <Link to="/" className="text-gray-700 hover:text-gray-900 ">Home</Link>
+          
+             
           {status ? (
-            <button onClick={logoutHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Logout</button>
-          ) : (
+           <div className="flex items-center">
+             
+             <Link to="/order-page" className="text-gray-700 hover:text-gray-900 mr-4">Orders</Link>
+             { admin ? 
+              <Link to="/admin" className="text-gray-700 hover:text-gray-900 mr-4">Dashboard</Link>
+              : 
+              <Link to="/cart" className="text-gray-700 hover:text-gray-900 pr-6"> Cart </Link>}
+              <button onClick={logoutHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 mr-2 rounded">Logout</button>
+             
+           </div>
+           ) : 
             <Link to="/login" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login</Link>
-          )}
+          }
         </div>
       </div>
     </nav>
   );
 };
 
-export default Header;
+export default Header;  
