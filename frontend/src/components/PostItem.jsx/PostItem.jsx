@@ -20,6 +20,7 @@ const PostItem = () => {
       const fetchdata = async () => {
         const data = await axios.get(
           `${url}/post/get-post-by-id/${params.postId}`,{
+            headers : {"content-type" : "application/json"},
             withCredentials:true,
             withXSRFToken:true,
           }
