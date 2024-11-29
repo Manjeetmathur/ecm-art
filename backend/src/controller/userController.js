@@ -128,9 +128,11 @@ const login  = asyncHandler(async(req,res) => {
 
 const logout = asyncHandler (async(req,res) => {
   try {
-    return res.clearCookie().json({
+    let user = req.user
+    return res.cookie('token','').json({
       success : true,
-      message : "user logged out successfully . . . "
+      message : "user logged out successfully . . . ",
+      user
     })
   } catch (error) {
     res.status(402).json({
