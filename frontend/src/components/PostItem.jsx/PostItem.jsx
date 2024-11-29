@@ -19,12 +19,17 @@ const PostItem = () => {
     try {
       const fetchdata = async () => {
         const data = await axios.get(
-          `${url}/post/get-post-by-id/${params.postId}`
+          `${url}/post/get-post-by-id/${params.postId}`,{
+            withCredentials:true,
+            withXSRFToken:true,
+          }
         );
         const res = data.data;
-console.log(res);
+        console.log(res);
 
         if (res.success) {
+          console.log(res.post);
+          
           dispatch(setPostData(res.post));
         }
       };
