@@ -91,7 +91,7 @@ const login  = asyncHandler(async(req,res) => {
       const token = jwt.sign({userId : user._id},process.env.ACCESS_TOKEN_SECRET,{expiresIn : "1d"})
 
       const tokenOption = {
-        domain :'ecm-art-frontend.vercel.app',
+        // domain :'localhost',
         secure : true,
         httpOnly:true,
         sameSite : "none",
@@ -128,7 +128,7 @@ const login  = asyncHandler(async(req,res) => {
 
 const logout = asyncHandler (async(req,res) => {
   try {
-    return res.cookie('token',null,null).json({
+    return res.cookie('token','').json({
       success : true,
       message : "user logged out successfully . . . "
     })
