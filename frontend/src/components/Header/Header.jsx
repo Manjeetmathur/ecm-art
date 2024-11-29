@@ -17,6 +17,7 @@ const Header = () => {
   const logoutHandler = async () => {
     const data = await axios.get(`${url}/user/logout`,{withCredentials:true,withXSRFToken:true});
     const res = data.data;
+console.log(res);
 
     if (res.success) {
       
