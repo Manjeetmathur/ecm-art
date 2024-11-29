@@ -8,6 +8,7 @@ import PostItem from "../components/PostItem.jsx/PostItem";
 import Order from "../components/Order/Order";
 import Admin from "../components/Admin/Admin";
 import Cart from "../components/Cart/Cart";
+import HomeLower from "../components/HomeMiddle/HomeLower";
 
 const router = createBrowserRouter([
        {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
                             path : "/admin",
                             element : <Admin/>
                      },
+                     // {
+                     //        path : "/home-lower",
+                     //        element : <HomeLower/>
+                     // },
               ]
        },
        

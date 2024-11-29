@@ -82,18 +82,18 @@ const HomeLower = ({ post }) => {
                                    <img
                                           src={p?.postImage}
                                           alt=""
-                                          className=" h-[40vh]  rounded-lg mb-4 hover:scale-[103%] transition-[5s] object-contain"
+                                          className=" w-[90vw]  rounded-lg mb-4 hover:scale-[103%] transition-[5s]"
                                    />
                             </Link>
 
                             <p className="text-gray-700 mb-4">{p.postContent.slice(0, 100)}...</p>
                             <div className="flex justify-between gap-4 items-center">
-                                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                   <button className="text-[4vw] md:text-[15px]  bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                           onClick={orderItem}
                                    >
                                           { bloading ? 'please wait...' : 'Buy Now'}
                                    </button>
-                                   <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
+                                   <button className="bg-gray-200 text-[4vw] md:text-[15px]  hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded"
                                           onClick={addToCart}
                                    >
                                           { cloading ? 'please wait...' :'Add to cart'}

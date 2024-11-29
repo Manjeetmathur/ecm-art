@@ -7,30 +7,31 @@ import HomeMiddle from "../../HomeMiddle/HomeMiddle";
 import HomeLower from "../../HomeMiddle/HomeLower";
 import { useSelector } from "react-redux";
 const Home = () => {
-
-
+  
   const {posts} =  useSelector(st => st.auth)
   
   return (
     <div className="">
 
-      <div className=" absolute top-[120px] md:top-[250px]  md:left-[150px] lg:left-[200px] left-[40px]">
-        <h1 className="text-2xl font-semibold w-[200px] md:w-[450px] lg:w-[550px] my-2">Sketch Your Art With Manjeet</h1>
-        <p className="text-[#683292] ">something something something</p>
-        <button className="btn my-4 px-2 text-md md:text-xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
+      <div className=" absolute top-[29vw] md:top-[22vw]  left-[13vw]">
+        <h1 className="text-[5vw] font-semibold  w-[50vw] my-2">Sketch Your Art With Manjeet</h1>
+        <p className="text-[#683292] w-[55vw] md:text-xl md:font-semibold ">something something something</p>
+        <Link to={'/'}>
+          <button  className="btn my-4 px-2 text-[4vw] md:text-2xl lg:text-3xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
+        </Link>
       </div>
       <div className="p-5 ">
       <img
         src="https://wallpaperaccess.com/full/181724.jpg"
         alt=""
-        className="w-full md:h-[30rem] rounded-lg mb-7  lg:h-[35rem] shadow-2xl "
+        className="w-full md:h-[52vw] rounded-lg mb-7  shadow-2xl "
       />
       </div>
 
-      <h1 className="text-4xl font-semibold flex justify-center">
+      <h1 className="text-[5vw] font-semibold flex justify-center mx-auto">
         Our Popular Art Work
       </h1>
-      <h2 className="flex justify-center m-4 text-[#683292]">
+      <h2 className="flex justify-center m-4 text-[2.7vw] md:text-[25px] lg:text-[35px] text-[#683292]">
         Ckeck Out Our Favourite Art Work
       </h2>
       <div className="flex flex-col md:flex-row justify-center my-5 border-b-2 shadow-xl">
