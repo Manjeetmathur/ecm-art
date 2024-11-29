@@ -129,7 +129,7 @@ const login  = asyncHandler(async(req,res) => {
 const logout = asyncHandler (async(req,res) => {
   try {
     let user = req.user
-    return res.clearCookie('token','').json({
+    return res.clearCookie('token').json({
       success : true,
       message : "user logged out successfully . . . ",
       user
