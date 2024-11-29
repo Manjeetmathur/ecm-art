@@ -3,15 +3,21 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { url } from "../bacxkendUrl/BackendUrl";
-
+import {useSelector} from "react-redux"
 const HomeLower = ({ post }) => {
        const p = (post);
        const [bloading,setbLoading] = useState(false)
        const [cloading,setcLoading] = useState(false)
        const navigate = useNavigate()
+
+       const {status} = useSelector(st => st.auth)
+       console.log("stats",status);
+       
        const orderItem = async () => {
               try {
+                     
                      setbLoading(true)
+                     if(!status) throw new Error("user is not logged in")
                      const data = await axios.post(
                             `${url}/post/order-item`,
                             { postId: p._id, postPrice: p.postPrice },
