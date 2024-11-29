@@ -93,6 +93,8 @@ const login  = asyncHandler(async(req,res) => {
       const tokenOption = {
         secure : true,
         httpOnly:true,
+        sameSite : "none",
+        
       }
 
       const loggedInUser = {
