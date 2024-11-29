@@ -9,7 +9,6 @@ import { url } from "../bacxkendUrl/BackendUrl";
 const PostItem = () => {
   const [bloading, setbLoading] = useState(false);
   const [cloading, setcLoading] = useState(false);
-  const [cart, setcart] = useState(false);
   const params = useParams();
   console.log("params",params);
   
@@ -35,7 +34,10 @@ const PostItem = () => {
         }
       };
       fetchdata();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      
+    }
   }, []);
 
   const { postData } = useSelector((st) => st.auth);
@@ -111,7 +113,7 @@ console.log(res);
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={addToCart}
           >
-          { cloading ? 'please wait...' : ( cart ? 'remove from cart' : 'Add to cart')}
+          { cloading ? 'please wait...' : 'Add to cart'}
           </button>
           <p className="text-red-500 font-bold">Rs. {postData?.postPrice}/-</p>
         </div>
