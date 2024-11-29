@@ -16,8 +16,10 @@ const HomeLower = ({ post }) => {
        const orderItem = async () => {
               try {
                      
+                     if(!status) {
+                            throw new Error("user is not logged in") ; 
+                     }
                      setbLoading(true)
-                     if(!status) throw new Error("user is not logged in")
                      const data = await axios.post(
                             `${url}/post/order-item`,
                             { postId: p._id, postPrice: p.postPrice },
@@ -45,6 +47,7 @@ const HomeLower = ({ post }) => {
        }
        const addToCart = async () => {
               try {
+                     if(!status) throw new Error("user is not logged in") 
                      setcLoading(true)
                      const data =await axios.post(`${url}/post/add-cart`,
                             { postId: p._id },
