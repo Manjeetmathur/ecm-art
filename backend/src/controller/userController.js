@@ -94,7 +94,7 @@ const login  = asyncHandler(async(req,res) => {
         // domain : 'github',
         secure : true,
         httpOnly:true,
-        sameSite : "strict",
+        sameSite : "none",
         maxAge : 1*24*60*60*1000,
         // crossSite : 'true'
       }
