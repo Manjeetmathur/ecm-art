@@ -18,7 +18,7 @@ const Header = () => {
     const data = await axios.post(`${url}/user/logout`,{"hii":"he"},
       {
         headers: {
-               'content-type': 'application/json',
+          'content-type': 'application/json',
         },
         withXRFToken : 'true',
         withCredentials:"true"
