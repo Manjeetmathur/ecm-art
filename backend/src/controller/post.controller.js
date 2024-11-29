@@ -10,7 +10,7 @@ import sendMail from "../utils/Sendmail.js";
 import { Admin } from "../model/admin.model.js";
 
 const createPost = asyncHandler(async (req, res) => {
-       const { postContent, postPrice, postTitle, postCategory, stock } = req.body
+       const { postContent, postPrice, postTitle, postCategory} = req.body
 
        try {
               const admin = req.user

@@ -92,7 +92,7 @@ const login  = asyncHandler(async(req,res) => {
 
       const tokenOption = {
         secure : true,
-        sameSite : "none",
+        sameSite : "strict",
         httpOnly:true,
         maxAge : 1 * 24 * 60 * 60 * 1000
       }
@@ -126,11 +126,7 @@ const login  = asyncHandler(async(req,res) => {
 
 const logout = asyncHandler (async(req,res) => {
   try {
-    const user = req.user
-    if(!user){
-      throw new ApiError("User is not logged in . . . ")
-    }
-    res.clearCookie('token').json({
+    return res.clearCookie('token').json({
       success : true,
       message : "user logged out successfully . . . "
     })

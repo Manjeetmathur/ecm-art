@@ -14,8 +14,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin : "https://ecm-art-frontend.vercel.app",
-    // origin : "http://localhost:5173",
+    origin : ["http://localhost:5173","https://ecm-art-frontend.vercel.app","*"],
     credentials: true,
   })
 );
