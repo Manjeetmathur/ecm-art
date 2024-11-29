@@ -22,6 +22,7 @@ const Header = () => {
     const res = data.data;
 
     if (res.success) {
+      
       dispatch(logout());
       toast.success(res.message);
       navigate("/login");
