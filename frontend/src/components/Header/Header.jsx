@@ -15,10 +15,15 @@ const Header = () => {
   const { status, admin } = useSelector((st) => st.auth);
 
   const logoutHandler = async () => {
-    const data = await axios.get(`${url}/user/logout`, {
-      withCredentials: true,
-      withXSRFToken: true,
-    });
+    const data = await axios.post(`${url}/user/logout`,{"hii":"he"},
+      {
+        headers: {
+               'content-type': 'application/json',
+        },
+        withXRFToken : 'true',
+        withCredentials:"true"
+      }
+    );
     const res = data.data;
 
     if (res.success) {
