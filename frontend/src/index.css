@@ -1,6 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.width{
-       width: 300px;
+.width {
+  width: 300px;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0; /* Fully transparent */
+  }
+  50% {
+    opacity: 0.5; /* Fully opaque */
+  }
+  100% {
+    opacity: 1; /* Fully transparent */
+  }
+}
+
+/* Keyframes for sliding from left to right */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%); /* Start off-screen to the left */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0); /* Slide to the normal position */
+    opacity: 1;
+  }
+}
+
+/* Keyframes for sliding from right to left */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%); /* Start off-screen to the right */
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0); /* Slide to the normal position */
+    opacity: 1;
+  }
+}
+
+/* Apply the animation */
+.slide-right {
+  animation: slideInRight 1s ease-out forwards;
+}
+/* Keyframes for sliding from top to bottom */
+@keyframes slideInTop {
+  0% {
+    transform: translateY(-100%); /* Start off-screen at the top */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* Slide to the normal position */
+    opacity: 1;
+  }
+}
+
+/* Apply the animation */
+.slide-top {
+  animation: slideInTop 1s ease-out forwards;
+}
+
+.fade {
+  animation: fadeInOut 1s ease-in;
+}
+.slideright {
+  animation: slideInLeft 2s ease-in;
+  /* animation: fadeInOut 2s ease-in-out; */
+}
+.cart{
+       animation: slideInRight 1s ease-in;
 }

@@ -13,14 +13,14 @@ const Home = () => {
   return (
     <div className="">
 
-      <div className=" absolute top-[29vw] md:top-[22vw]  left-[13vw]">
+      <div className=" absolute top-[29vw] md:top-[22vw]  left-[13vw] fade">
         <h1 className="text-[5vw] font-semibold  w-[50vw] my-2">Sketch Your Art With Manjeet</h1>
         <p className="text-[#683292] w-[55vw] md:text-xl md:font-semibold ">something something something</p>
-        <Link to={'/'}>
+        <Link to={'/explore'}>
           <button  className="btn my-4 px-2 text-[4vw] md:text-2xl lg:text-3xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
         </Link>
       </div>
-      <div className="p-5 ">
+      <div className="p-5 fade">
       <img
         src="https://wallpaperaccess.com/full/181724.jpg"
         alt=""
@@ -31,9 +31,11 @@ const Home = () => {
       <h1 className="text-[5vw] font-semibold flex justify-center mx-auto">
         Our Popular Art Work
       </h1>
-      <h2 className="flex justify-center m-4 text-[2.7vw] md:text-[25px] lg:text-[35px] text-[#683292]">
-        Ckeck Out Our Favourite Art Work
-      </h2>
+      <Link to={'/explore'}>
+        <h2 className="flex justify-center m-4 text-[2.7vw] md:text-[25px] lg:text-[35px] text-[#683292]">
+          Ckeck Out More Art Work
+        </h2>
+      </Link>
       <div className="flex flex-col md:flex-row justify-center my-5 border-b-2 shadow-xl">
        <HomeMiddle />
       </div>

@@ -30,24 +30,24 @@ console.log(res);
   };
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white text-[4vw] md:text-[15px] md:font-semibold  shadow-md">
       <div className=" mx-auto px-4 py-4 flex justify-between items-center">
         <Link to="/" className="text-xl font-bold md:block hidden">
           {/* Replace with your logo component or image */}
           Your Logo
         </Link>
         <div className="flex mx-auto items-center gap-6  md:gap-14">
-          <Link to="/" className="text-gray-700 hover:text-gray-900 ">Home</Link>
+          <Link to="/" className="text-gray-700 hover:text-blue-500 ">Home</Link>
           
              
           {status ? (
            <div className="flex mx-auto gap-10 items-center ">
              
-             <Link to="/order-page" className="text-gray-700 hover:text-gray-900 ">Orders</Link>
+             <Link to="/order-page" className="text-gray-700 hover:text-blue-500">Orders</Link>
              { admin ? 
-              <Link to="/admin" className="text-gray-700 hover:text-gray-900 ">Dashboard</Link>
+              <Link to="/admin" className="text-gray-700 hover:text-blue-500 ">Dashboard</Link>
               : 
-              <Link to="/cart" className="text-gray-700 hover:text-gray-900 "> Cart </Link>}
+              <Link to="/cart" className="text-gray-700 hover:text-blue-500 "> Cart </Link>}
               <button onClick={logoutHandler} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded">Logout</button>
              
            </div>

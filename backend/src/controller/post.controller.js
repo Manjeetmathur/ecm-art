@@ -264,15 +264,17 @@ const orderItem = asyncHandler(async (req, res) => {
 const cancelOrder = asyncHandler(async (req, res) => {
        const { orderId } = req.body
        const user = req.user
+       
        try {
               if (!orderId) {
                      throw new ApiError(401, "Order not found");
               }
-              const order = await Order.findByIdAndDelete(orderId)
               const admin = await Admin.findOne({ orders: orderId })
-
+              
+              const order = await Order.findByIdAndDelete(orderId)
+              
               if (!order) {
-                     throw new ApiError("Order not found")
+                     throw new ApiError(404,"Order not found")
               }
 
               user.order = user.order.filter(id => id.toString() !== orderId.toString())
@@ -281,7 +283,7 @@ const cancelOrder = asyncHandler(async (req, res) => {
               admin.orders = admin.orders.filter(id => id.toString() !== orderId.toString())
               await admin.save()
 
-              res.status(200).json({
+              return res.status(200).json({
                      message: "order cancel",
                      success: true
               })
@@ -366,8 +368,6 @@ const getAllPost = asyncHandler(async (req, res) => {
 const getPostById = asyncHandler(async (req, res) => {
        try {
               const { postId } = req.params
-              console.log(postId);
-
               const post = await Post.findById(postId)
 
               res.status(200).json({

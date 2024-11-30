@@ -9,6 +9,7 @@ import Order from "../components/Order/Order";
 import Admin from "../components/Admin/Admin";
 import Cart from "../components/Cart/Cart";
 import HomeLower from "../components/HomeMiddle/HomeLower";
+import Explore from "../components/ExploreMore/Explore";
 
 const router = createBrowserRouter([
        {
@@ -47,10 +48,10 @@ const router = createBrowserRouter([
                             path : "/admin",
                             element : <Admin/>
                      },
-                     // {
-                     //        path : "/home-lower",
-                     //        element : <HomeLower/>
-                     // },
+                     {
+                            path : "/explore",
+                            element : <Explore/>
+                     },
               ]
        },
        
