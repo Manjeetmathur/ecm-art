@@ -65,7 +65,7 @@
   animation: fadeInOut 1s ease-in;
 }
 .slideright {
-  animation: slideInLeft 2s ease-in;
+  animation: slideInLeft 1s ease-in;
   /* animation: fadeInOut 2s ease-in-out; */
 }
 .cart{
