@@ -14,13 +14,13 @@ const PostItem = () => {
   const [quantity, setQuantity] = useState(1);
 
   const handleIncrement = () => {
-         setQuantity(quantity + 1);
+    setQuantity(quantity + 1);
   };
 
   const handleDecrement = () => {
-         if (quantity > 1) {
-                setQuantity(quantity - 1);
-         }
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   };
   const dispatch = useDispatch();
 
@@ -28,11 +28,12 @@ const PostItem = () => {
     try {
       const fetchdata = async () => {
         const data = await axios.get(
-          `${url}/post/get-post-by-id/${params.postId}`, {
-          headers: { "content-type": "application/json" },
-          withCredentials: true,
-          withXSRFToken: true,
-        }
+          `${url}/post/get-post-by-id/${params.postId}`,
+          {
+            headers: { "content-type": "application/json" },
+            withCredentials: true,
+            withXSRFToken: true,
+          }
         );
         const res = data.data;
         console.log(res);
@@ -46,17 +47,15 @@ const PostItem = () => {
       fetchdata();
     } catch (error) {
       console.log(error);
-
     }
   }, []);
 
   const { postData, status } = useSelector((st) => st.auth);
 
-
   const navigate = useNavigate();
   const orderItem = async () => {
     try {
-      if (!status) throw new Error("User is not logged in")
+      if (!status) throw new Error("User is not logged in");
       setbLoading(true);
       const data = await axios.post(
         `${url}/post/order-item`,
@@ -84,7 +83,7 @@ const PostItem = () => {
   };
   const addToCart = async () => {
     try {
-      if (!status) throw new Error("User is not logged in")
+      if (!status) throw new Error("User is not logged in");
       setcLoading(true);
       console.log(cloading);
 
@@ -103,19 +102,23 @@ const PostItem = () => {
       if (res.success) {
         toast.success(res.message);
       } else {
-
         toast(res.message);
       }
     } catch (error) {
-      toast.error("user is not logged in")
+      toast.error("user is not logged in");
     } finally {
       setcLoading(false);
     }
   };
 
+  const openWhatsapp = () => { const phoneNumber = 'YOUR_PHONE_NUMBER'; // Replace with your actual phone number
+    const message = 'Hi, I would like to connect with you.'; // Optional: Default message
+
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`);
+  };
+
   return (
     <div className="m-10 md:w-[90%] flex flex-col md:flex-row gap-5 justify-center">
-
       <Link to={`${postData?.postImage}`}>
         <img
           src={postData?.postImage}
@@ -127,31 +130,39 @@ const PostItem = () => {
         <h2 className="text-xl font-bold mb-4">{postData?.postTitle}</h2>
         <p className="text-gray-700 mb-4">{postData?.postContent}</p>
         <div className="flex justify-between items-center mb-4">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             onClick={addToCart}
           >
-            {cloading ? 'please wait...' : 'Add to cart'}
+            {cloading ? "please wait..." : "Add to cart"}
           </button>
-          <div className="items-center flex mx-auto gap-4" >
-          <button className="text-[18px]" onClick={handleDecrement}>
-            -
-          </button>
-          <p className="text-[15px]">{quantity}</p>
-          <button className="text-[15px]" onClick={handleIncrement}>
-            +
-          </button>
-        </div>
+          <div className="items-center flex mx-auto gap-4">
+            <button className="text-[18px]" onClick={handleDecrement}>
+              -
+            </button>
+            <p className="text-[15px]">{quantity}</p>
+            <button className="text-[15px]" onClick={handleIncrement}>
+              +
+            </button>
+          </div>
           <p className="text-red-500 font-bold">Rs. {postData?.postPrice}/-</p>
         </div>
-        
-        
-        
-        <button
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          onClick={orderItem}
-        >
-          {bloading ? 'please wait...' : 'Buy Now'}
-        </button>
+
+        <div className="flex justify-between">
+         
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={openWhatsapp}
+          >
+            {"Whatsapp Now"}
+          </button>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={orderItem}
+          >
+            {bloading ? "please wait..." : "Buy Now"}
+          </button>
+        </div>
       </div>
     </div>
   );
