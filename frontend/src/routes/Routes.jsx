@@ -10,6 +10,7 @@ import Admin from "../components/Admin/Admin";
 import Cart from "../components/Cart/Cart";
 import HomeLower from "../components/HomeMiddle/HomeLower";
 import Explore from "../components/ExploreMore/Explore";
+import RouterProtector from "../components/RouterProtector/RouterProtector";
 
 const router = createBrowserRouter([
        {
@@ -22,7 +23,9 @@ const router = createBrowserRouter([
                      },
                      {
                             path : "/",
-                            element : <Home/>
+                            element : <RouterProtector>
+                                          <Home/>
+                                   </RouterProtector>
                      },
                      {
                             path : "/post-item/:postId",

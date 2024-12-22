@@ -64,6 +64,8 @@ const createPost = asyncHandler(async (req, res) => {
 
 const deletePost = asyncHandler(async (req, res) => {
        const { postId } = req.body
+       console.log(postId);
+       
        const admin = req.user
        try {
 
