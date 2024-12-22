@@ -43,7 +43,7 @@ const Home = () => {
       <div className="flex flex-col md:flex-row justify-center my-5 border-b-2 shadow-xl">
        <HomeMiddle />
       </div>
-      <div className="md:grid lg:grid-cols-3 gap-5 md:grid-cols-2 mt-10 shadow-xl pb-6">
+      <div className="md:grid lg:grid-cols-3 md:grid-cols-2 mt-1 shadow-xl pb-">
         {
           posts?.map((item,idx) => {
             return <HomeLower key={idx} post={item}/>
