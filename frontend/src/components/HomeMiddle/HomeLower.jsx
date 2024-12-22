@@ -92,7 +92,7 @@ const HomeLower = ({ post }) => {
                                    <img
                                           src={p?.postImage}
                                           alt=""
-                                          className=" w-[90vw]  rounded-lg mb-4 hover:scale-[103%] transition-[5s]"
+                                          className=" w-[90vw]  rounded-lg mb-4 hover:scale-[103%] transition-[5s] object-cover"
                                    />
                             </Link>
 
