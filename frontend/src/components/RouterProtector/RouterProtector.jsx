@@ -8,8 +8,6 @@ const RouterProtector = ({children}) => {
        useEffect(()=>{
               if(!status){
                      navigate('/login')
-              }else{
-                navigate('/')
               }
        },[])
 
