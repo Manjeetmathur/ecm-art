@@ -111,8 +111,8 @@ const PostItem = () => {
     }
   };
 
-  const openWhatsapp = () => { const phoneNumber = 'YOUR_PHONE_NUMBER'; // Replace with your actual phone number
-    const message = 'Hi, I would like to connect with you.'; // Optional: Default message
+  const openWhatsapp = () => { const phoneNumber = '6287773228'; // Replace with your actual phone number
+    const message = "Hi, which item , you like to order ."; // Optional: Default message
 
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`);
   };
