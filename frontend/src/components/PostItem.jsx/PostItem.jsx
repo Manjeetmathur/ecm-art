@@ -120,7 +120,7 @@ const PostItem = () => {
         <img
           src={postData?.postImage}
           alt=""
-          className="h-[300px] w-[300px] lg:h-[350px] flex mx-auto rounded-lg shadow-md"
+          className="h-[300px] w-[300px] lg:h-[350px] flex mx-auto rounded-lg shadow-md object-cover"
         />
       </Link>
       <div className="flex flex-col">
