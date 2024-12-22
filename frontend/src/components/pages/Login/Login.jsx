@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { login, setAdmin } from '../../../store/authSlice'
 import toast from 'react-hot-toast'
 import { url } from '../../bacxkendUrl/BackendUrl'
 const Login = () => {
-
+       const {status} =  useSelector(st=>st.auth)
+       
+       
+       const navigate = useNavigate()
+       useEffect(()=>{
+              if(status){
+                     navigate('/')
+              }
+       },[])
        const [email,setEmail] = useState("")
        const [password,setPassword] = useState("")
        const [loading,setLoading] = useState(false)
        const dispatch = useDispatch()
-       const navigate = useNavigate()
        const handleLogin = async (e) => {
               e.preventDefault()
               
