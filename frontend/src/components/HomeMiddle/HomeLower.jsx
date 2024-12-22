@@ -85,7 +85,7 @@ const HomeLower = ({ post }) => {
       
 
        return (
-              <div className=" w-full flex justify-center my-8 ">
+              <div className=" w-full flex justify-center my-8 blockk">
                      <div className="flex flex-col items-center w-[80%] shadow-xl bg-white rounded-lg p-4">
                             <h2 className="text-xl font-bold mb-4">{p.postTitle}</h2>
                             <Link to={`/post-item/${p._id}`} className="">

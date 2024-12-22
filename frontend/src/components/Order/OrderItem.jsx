@@ -51,7 +51,7 @@ const OrderItem = (orders) => {
 
 
   return (
-    <div className="order-details bg-white shadow-md rounded-lg p-6 m-10">
+    <div className="order-details bg-white shadow-md rounded-lg p-6 m-10 blockk">
       <div className="flex justify-between border-b border-gray-200 pb-4 mb-4">
         <p className="text-gray-700">Order ID: {order?._id.slice(16, 28)}</p>
         <p className="text-gray-700">Order Status: {order?.status}</p>

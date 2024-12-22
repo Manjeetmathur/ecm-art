@@ -17,12 +17,12 @@ const Home = () => {
         <h1 className="text-[5vw] font-semibold  w-[50vw] my-2">Sketch Your Art With Manjeet</h1>
         <p className="text-[#683292] w-[55vw] md:text-xl md:font-semibold ">something something something</p>
         <Link to={'/explore'}>
-          <button  className="btn my-4 px-2 text-[4vw] md:text-2xl lg:text-3xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
+          <button  className="btn my-4 px-2 text-[10px] md:text-xl lg:text-2xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
         </Link>
       </div>
       <div className="p-5 fade">
       <img
-        src="https://wallpaperaccess.com/full/181724.jpg"
+        src="https://assets-global.website-files.com/6152909339c5938b8fdca638/63a3a3555278444b4c87cd6a_OWE176_Kids%20art_HERO_1200x674.jpg"
         alt=""
         className="w-full md:h-[52vw] rounded-lg mb-7  shadow-2xl "
       />
@@ -32,7 +32,7 @@ const Home = () => {
         Our Popular Art Work
       </h1>
       <Link to={'/explore'}>
-        <h2 className="flex justify-center m-4 text-[2.7vw] md:text-[25px] lg:text-[35px] text-[#683292]">
+        <h2 className="flex justify-center m-4 text-[13px] md:text-[25px] lg:text-[35px] text-[#683292]">
           Ckeck Out More Art Work
         </h2>
       </Link>

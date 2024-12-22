@@ -17,16 +17,7 @@
 }
 
 /* Keyframes for sliding from left to right */
-@keyframes slideInLeft {
-  0% {
-    transform: translateX(-100%); /* Start off-screen to the left */
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0); /* Slide to the normal position */
-    opacity: 1;
-  }
-}
+
 
 /* Keyframes for sliding from right to left */
 @keyframes slideInRight {
@@ -64,10 +55,54 @@
 .fade {
   animation: fadeInOut 1s ease-in;
 }
+@keyframes slideInLeft {
+  0% {
+    /* transform: translateX(-50%); Start off-screen to the left */
+    /* clip-path: inset(100% 100% 0 0); */
+    opacity: 0;
+  }
+  100% {
+    /* transform: translateX(0); Slide to the normal position */
+    /* clip-path: inset(0 0 0 0); */
+    opacity: 1;
+  }
+}
 .slideright {
-  animation: slideInLeft 1s ease-in;
+  animation: slideInLeft 3s linear;
   /* animation: fadeInOut 2s ease-in-out; */
 }
 .cart{
-       animation: slideInRight 1s ease-in;
+  animation: slideInRight 1s ease-in;
+}
+@keyframes appear{
+  from{
+    opacity: 0;
+    scale: 0.5;
+    /* clip-path: inset(100% 100% 0 0 ); */
+  }
+  to{
+    opacity: 1;
+    /* clip-path: inset(0 0 0 0 ); */
+    scale: 1;
+  }
+}
+.blockk{
+  animation: appear  linear;
+  animation-timeline:view() ;
+  animation-range: entry 0% cover 40%;
+
+}
+@keyframes appear1{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+.css1{
+  animation: appear1  linear;
+  animation-timeline:view() ;
+  animation-range: entry 0% cover 40%;
+
 }

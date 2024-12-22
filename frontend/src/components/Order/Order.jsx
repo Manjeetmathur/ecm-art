@@ -14,11 +14,11 @@ const Order = () => {
     <div>
       
       <h2 className="text-2xl font-bold flex justify-center mt-4">Your Order Details</h2>
-     <div className="md:grid md:grid-cols-2 lg:grid-cols-3 slideright">
+     <div className="md:grid md:grid-cols-2 lg:grid-cols-3 slideright ">
      {
        userInfo?.order?.map((item) => {
-          return <div className="">
-            <OrderItem  key={item._id} orders={item}  />
+          return <div key={item._id} className="">
+            <OrderItem   orders={item}  />
           </div>
         })
       }
