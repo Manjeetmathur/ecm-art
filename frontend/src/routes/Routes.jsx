@@ -23,9 +23,7 @@ const router = createBrowserRouter([
                      },
                      {
                             path : "/",
-                            element : <RouterProtector>
-                                          <Home/>
-                                   </RouterProtector>
+                            element : <Home/>
                      },
                      {
                             path : "/post-item/:postId",
@@ -33,11 +31,11 @@ const router = createBrowserRouter([
                      },
                      {
                             path : "/order-page",
-                            element : <Order/>
+                            element :<RouterProtector><Order/></RouterProtector> 
                      },
                      {
                             path : "/cart",
-                            element : <Cart/>
+                            element : <RouterProtector> <Cart/></RouterProtector>
                      },
                      {
                             path : "/login",
@@ -49,7 +47,7 @@ const router = createBrowserRouter([
                      },
                      {
                             path : "/admin",
-                            element : <Admin/>
+                            element : <RouterProtector><Admin/></RouterProtector> 
                      },
                      {
                             path : "/explore",
