@@ -6,6 +6,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import HomeMiddle from "../../HomeMiddle/HomeMiddle";
 import HomeLower from "../../HomeMiddle/HomeLower";
 import { useSelector } from "react-redux";
+import p7 from '../../../assets/p7.jpeg'
 const Home = () => {
   
   const {posts} =  useSelector(st => st.auth)
@@ -13,16 +14,19 @@ const Home = () => {
   return (
     <div className="">
 
-      <div className=" absolute top-[29vw] md:top-[22vw]  left-[13vw] fade">
-        <h1 className="text-[5vw] font-semibold  w-[50vw] my-2">Sketch Your Art With Manjeet</h1>
-        <p className="text-[#683292] w-[55vw] md:text-xl md:font-semibold ">something something something</p>
-        <Link to={'/explore'}>
-          <button  className="btn my-4 px-2 text-[10px] md:text-xl lg:text-2xl flex items-center gap-2">Explore More <FaLongArrowAltRight className="mt-1" /> </button>
-        </Link>
+      <div className=" absolute top-[44vw] md:top-[22vw  left-[38vw] fade">
+        {/* <h1 className="text-[5vw] font-semibold  w-[50vw] my-2">Sketch Your Art With Manjeet</h1> */}
+        {/* <p className="text-[#683292] w-[55vw] md:text-xl md:font-semibold ">something something something</p> */}
+        {/* <Link to={'/explore'}>
+          <button  className="btn my-4 px-2 text-[10px] md:text-xl 
+            lg:text-2xl flex items-center gap-2">
+              Explore More <FaLongArrowAltRight className="mt-1" /> 
+          </button>
+        </Link> */}
       </div>
       <div className="p-5 fade">
       <img
-        src="https://assets-global.website-files.com/6152909339c5938b8fdca638/63a3a3555278444b4c87cd6a_OWE176_Kids%20art_HERO_1200x674.jpg"
+        src={p7}
         alt=""
         className="w-full md:h-[52vw] rounded-lg mb-7  shadow-2xl "
       />

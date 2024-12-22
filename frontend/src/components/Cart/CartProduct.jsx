@@ -26,7 +26,7 @@ const CartProduct = ({ product }) => {
                      setbLoading(true);
                      const data = await axios.post(
                             `${url}/post/order-item`,
-                            { postId: postData._id, postPrice: postData.postPrice, quantity },
+                            { postId: postData?._id, postPrice: postData?.postPrice, quantity },
                             {
                                    withCredentials: true,
                                    withXSRFToken: true,
@@ -55,7 +55,7 @@ const CartProduct = ({ product }) => {
                      setcLoading(true);
                      const data = await axios.post(
                             `${url}/post/remove-cart`,
-                            { postId: postData._id },
+                            { postId: postData?._id },
                             {
                                    withCredentials: true,
                                    withXSRFToken: true,
@@ -85,9 +85,9 @@ const CartProduct = ({ product }) => {
               <div className="p-5">
                      <div className="flex items-center border-b border-gray-200 py-4 cart ">
                             <div className="flex-shrink-0 mr-4">
-                                   <Link to={`/post-item/${postData._id}`}>
+                                   <Link to={`/post-item/${postData?._id}`}>
                                           <img
-                                                 src={postData.postImage}
+                                                 src={postData?.postImage}
                                                  alt="Product Image"
                                                  className="w-[100px] h-[100px] object-cover rounded-lg"
                                           />
@@ -95,11 +95,11 @@ const CartProduct = ({ product }) => {
                             </div>
                             <div className="flex flex-col">
                                    <h3 className="text-base font-bold text-gray-700 mb-1">
-                                          {postData.postTitle}
+                                          {postData?.postTitle}
                                    </h3>
                                    <div className="flex justify-between items- flex-col">
                                           <p className="text-sm font-bold text-gray-900">
-                                                 Rs. {postData.postPrice}
+                                                 Rs. {postData?.postPrice}
                                           </p>
                                           <div className="flex items-center ">
                                                  <button
