@@ -15,7 +15,6 @@ const ContextProvider = ({ children }) => {
                      const fetch = async () => {
                             const data = await axios.get(`${url}/post/get-post`)
                             const res = data.data
-                            console.log(res);
                             
                             if (res.success) {
                                    dispatch(setPosts(res.allPost));
